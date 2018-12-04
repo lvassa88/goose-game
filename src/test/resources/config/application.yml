@@ -19,7 +19,7 @@ spring:
         name: GooseGame
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:GooseGame;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:mem:GooseGame;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;
         name:
         username:
         password:
