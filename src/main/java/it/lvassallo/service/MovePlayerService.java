@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import it.lvassallo.domain.Player;
 import it.lvassallo.service.dto.MovePlayerDTO;
 
 @Service
@@ -12,10 +11,10 @@ public class MovePlayerService {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	private final PlayerService playerService;
+	private final GameRulesService gameRulesService;
 
-	public MovePlayerService(final PlayerService _playerService) {
-		playerService = _playerService;
+	public MovePlayerService(final GameRulesService _gameRulesService) {
+		gameRulesService = _gameRulesService;
 	}
 
 	public String movePlayer(MovePlayerDTO movePlayerDTO) {
@@ -25,19 +24,10 @@ public class MovePlayerService {
 		}
 		try {
 			String playerName = movePlayerDTO.getPlayerName();
-			Player player = playerService.findByName(playerName);
-			int dado1 = movePlayerDTO.getDado1();
-			int dado2 = movePlayerDTO.getDado2();
-
-			int increasePosition = dado1 + dado2;
-			log.debug("Increase position: " + increasePosition);
-
-			int actualPosition = player.getPosition();
-			player.setPosition(actualPosition + increasePosition);
-			player = playerService.save(player);
-
-			sb.append("" + playerName + " rolls " + dado1 + ", " + dado2 + ". " + playerName + " move from "
-					+ ((actualPosition == 0) ? "Start" : actualPosition) + " to " + player.getPosition());
+			int die1 = movePlayerDTO.getDado1();
+			int die2 = movePlayerDTO.getDado2();
+			String msg = gameRulesService.calculateAndPersistNewPosition(playerName, die1, die2);
+			sb.append(msg);
 		} catch (Exception e) {
 			log.error("Exception:", e);
 			sb.append("Not found player: " + movePlayerDTO.getPlayerName());

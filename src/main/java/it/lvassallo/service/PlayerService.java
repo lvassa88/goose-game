@@ -59,4 +59,8 @@ public class PlayerService {
 		return playerRepo.save(player);
 	}
 
+	public List<Player> findAll() {
+		return playerRepo.findAll();
+	}
+
 }
