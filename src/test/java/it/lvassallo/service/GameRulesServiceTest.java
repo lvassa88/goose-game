@@ -131,7 +131,7 @@ public class GameRulesServiceTest {
 		String msg = gameRulesService.calculateAndPersistNewPosition(playerName, die1, die2);
 
 		verify(playerServiceMock).findAll();
-		verify(playerServiceMock, times(2)).save(any());
+		verify(playerServiceMock, times(1)).save(any());
 		assertThat(msg).isEqualTo(playerName + " rolls 2, 2. " + playerName + " moves from " + startPosition
 				+ " to 14, The Goose. " + playerName + " moves again and goes to 18, The Goose. " + playerName
 				+ " moves again and goes to 22");
@@ -146,9 +146,10 @@ public class GameRulesServiceTest {
 		when(playerServiceMock.findAll()).thenReturn(players);
 		when(playerServiceMock.save(any())).thenReturn(players.get(0));
 		String msg = gameRulesService.calculateAndPersistNewPosition(playerName, die1, die2);
+		System.out.println(msg);
 
 		verify(playerServiceMock).findAll();
-		verify(playerServiceMock, times(3)).save(any());
+		verify(playerServiceMock, times(1)).save(any());
 		assertThat(msg).isEqualTo(playerName + " rolls 5, 4. " + playerName + " moves from Start to 9, The Goose. " + playerName + " moves again and goes to 18, The Goose. " + playerName
 				+ " moves again and goes to 27, The Goose. " + playerName + " moves again and goes to 36");
 	}

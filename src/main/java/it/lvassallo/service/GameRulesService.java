@@ -118,10 +118,12 @@ public class GameRulesService {
 			sb.append(String.format(rolls_goose_single, playerName, strInitPosition, total));
 		}
 
-		player = playerService.save(player.position(newTotal));
-
 		if (isTotalIntoTheGoose(newTotal)) {
 			processTheGoose(player, playerName, die1, die2, newTotal, sb);
+		}
+
+		if (player.getPosition() < newTotal) {
+			player = playerService.save(player.position(newTotal));
 		}
 		return sb.toString();
 	}
