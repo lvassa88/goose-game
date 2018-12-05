@@ -18,7 +18,7 @@ public class MovePlayerService {
 	}
 
 	public String movePlayer(MovePlayerDTO movePlayerDTO) {
-		StringBuilder sb = new StringBuilder("");
+		String msg = "";
 		if (isNeedLaunchDie(movePlayerDTO)) {
 			setNewValueToDadi(movePlayerDTO);
 		}
@@ -26,13 +26,14 @@ public class MovePlayerService {
 			String playerName = movePlayerDTO.getPlayerName();
 			int die1 = movePlayerDTO.getDado1();
 			int die2 = movePlayerDTO.getDado2();
-			String msg = gameRulesService.calculateAndPersistNewPosition(playerName, die1, die2);
-			sb.append(msg);
+			msg = gameRulesService.calculateAndPersistNewPosition(playerName, die1, die2);
+
 		} catch (Exception e) {
 			log.error("Exception:", e);
-			sb.append("Not found player: " + movePlayerDTO.getPlayerName());
+			msg = "Not found player: " + movePlayerDTO.getPlayerName();
 		}
-		return sb.toString();
+		log.info("Message returned: {}", msg);
+		return msg;
 	}
 
 	private boolean isNeedLaunchDie(MovePlayerDTO movePlayerDTO) {
