@@ -25,7 +25,7 @@ public class PlayerService {
 
 	public String addNewPlayer(String playerName) {
 		StringBuilder msgReturn = new StringBuilder("");
-		log.debug("Check esists player {}", playerName);
+		log.debug("Check exists player {}", playerName);
 		Optional<Player> playerOpt = playerRepo.findOneByName(playerName);
 		if (playerOpt.isPresent()) {
 			msgReturn.append(playerName + ": already existing player");
