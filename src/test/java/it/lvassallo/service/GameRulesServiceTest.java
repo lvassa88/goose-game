@@ -146,7 +146,6 @@ public class GameRulesServiceTest {
 		when(playerServiceMock.findAll()).thenReturn(players);
 		when(playerServiceMock.save(any())).thenReturn(players.get(0));
 		String msg = gameRulesService.calculateAndPersistNewPosition(playerName, die1, die2);
-		System.out.println(msg);
 
 		verify(playerServiceMock).findAll();
 		verify(playerServiceMock, times(1)).save(any());
