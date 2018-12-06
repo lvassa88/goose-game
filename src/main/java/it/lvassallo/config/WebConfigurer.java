@@ -58,11 +58,11 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
         if (env.getActiveProfiles().length != 0) {
             log.info("Web application configuration, using profiles: {}", (Object[]) env.getActiveProfiles());
         }
-        EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
-        initMetrics(servletContext, disps);
-        if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_PRODUCTION)) {
-            initCachingHttpHeadersFilter(servletContext, disps);
-        }
+//        EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
+//        initMetrics(servletContext, disps);
+//        if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_PRODUCTION)) {
+//            initCachingHttpHeadersFilter(servletContext, disps);
+//        }
         if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT)) {
             initH2Console(servletContext);
         }
