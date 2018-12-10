@@ -1,7 +1,6 @@
 package it.lvassallo.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,7 +27,7 @@ public class MovePlayerServiceTest {
 	@Test
 	public void testNeedRandomValueToDadi() throws Exception {
 		MovePlayerDTO movePlayerDTO = new MovePlayerDTO(playerName);
-		when(gameRulesService.calculateAndPersistNewPosition(playerName, any(), any())).thenReturn("OK");
+		when(gameRulesService.calculateAndPersistNewPosition(playerName, 0, 0)).thenReturn("OK");
 		movePlayerService.movePlayer(movePlayerDTO);
 
 		assertThat(movePlayerDTO.getDado1()).isNotEqualTo(0);
